@@ -1,18 +1,21 @@
 import os, json, shutil
 from datetime import datetime
 
+# creates a string from the post date
 def date_to_title(date):
     datetime_object = datetime.strptime(str(date), '%Y-%m-%d %H:%M:%S')
     formatted_date = datetime_object.strftime("%B %d, %Y")
 
     return formatted_date
 
+# creates a string from the post date used for order posts in the frontmatter
 def date_to_frontmatter(date):
     datetime_object = datetime.strptime(str(date), '%Y-%m-%d %H:%M:%S')
     formatted_date = datetime_object.strftime("%Y-%m-%d %H:%M:%S")
 
     return formatted_date
 
+## Instagram image file names are extremely long, this function renames the image
 def rename_image(date, image, post_image_dir, inc):
     fname = date.replace(' ','_')
     ext = '-' + str(inc) + '.webp'
@@ -26,6 +29,7 @@ def rename_image(date, image, post_image_dir, inc):
 
     return dest_image_path
 
+# creates the text for index.md
 def create_post_text(title_date, frontmatter_date, post_images, text):
     images = []
     for i in post_images:
@@ -41,6 +45,7 @@ def create_post_text(title_date, frontmatter_date, post_images, text):
 
     return content
 
+# copies and renames Hugo post images 
 def create_post_images(image_src_list, post_image_dir):
     post_image_list = []
     inc = 0
@@ -51,6 +56,7 @@ def create_post_images(image_src_list, post_image_dir):
 
     return post_image_list
 
+# created directories for Hugo posts
 def create_post_dir(title_date):
     post_dir = title_date.replace(' ','_')
     post_dir = post_dir.replace(',','')
@@ -68,6 +74,7 @@ def create_post_dir(title_date):
     
     return dir_path
 
+# creates the post directory, post, and post images
 def create_post(title_date, frontmatter_date, image_src_list, text):
     post_dir = create_post_dir(title_date)
     post_path = os.path.join(post_dir, "index.md")
