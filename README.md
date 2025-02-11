@@ -1,5 +1,6 @@
 # Convert Instagram Export to Hugo Posts
 
+![puerco al pastor](October_02_2024-1.webp)
 This script converts an Instagram export file into a set of Hugo posts.
 
 ## Pre-requisites
